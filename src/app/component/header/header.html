@@ -3,9 +3,30 @@
         <div class="text-white ml-2 p-3 w-[23%]">
             <h1 class="text-xl font-bold">eStore</h1>
         </div>
-        <div class="p-0 my-4 bg-white w-[50%] h-[2.5rem] flex items-center">
+        <div class="p-0 my-4 bg-white w-[50%]  h-[2.5rem] flex items-center">
+            <select class="w-[auto] bg-gray-300 h-full border-none outline-none px-3 pr-5 font-semibold">
+                <option value="men">Men</option>
+                <option value="woman">Woman</option>
+                <option value="kids">Kids</option>
+            </select>
             <input class="w-[90%] h-full border-none outline-none inline-block px-3 " type="text" placeholder="search here....">
             <button class="w-[10%] h-10 flex items-center justify-center bg-gray-300 border-none"><fa-icon [icon]="faSearch"></fa-icon></button>
+        </div>
+        <div class="flex items-center h-full w-[27%] gap-6 justify-end mr-2">
+            <div class="text-white flex items-center gap-2">
+                <fa-icon class="text-[1.3em]" [icon]="faUserCircle"></fa-icon>
+                <h5>
+                    <a class="text-white no-underline" href="">Sign In</a>
+                </h5>
+                <span>/</span>
+                <h5>
+                    <a class="text-white no-underline" href="">Register</a>
+                </h5>
+            </div>
+            <div class="flex gap-4 items-center justify-center text-white text-[1.3em]">
+                <fa-icon  [icon]="faHeart"></fa-icon>
+                <fa-icon  [icon]="faShoppingCart"></fa-icon>
+            </div>
         </div>
     </div>
 </div>
