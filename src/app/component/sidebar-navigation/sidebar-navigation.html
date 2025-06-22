@@ -1,0 +1,31 @@
+<div class="mt-6 p-5 shadow-lg h-full border rounded-2xl bg-gray-50 border-gray-200">
+    <!-- title -->
+    <div class="border-b pb-2">
+        <p class="text-xl font-bold text-gray-700 text-center tracking-wide">categories</p>
+    </div>
+
+    <!-- Acordion-->
+    <div class="mt-4 space-y-3">
+        @for(category of getSubCategories(); track category.id){
+        <details class="group bg-white rounded-t-xl border border-gray-200">
+            <summary
+                class="px-6 py-3 bg-blue-100 hover:bg-blue-50 font-semibold text-gray-700 cursor-pointer flex items-center justify-between transition rounded-t-xl">
+                <span class="text-gray-700">{{category.category}}</span>
+                <fa-icon [icon]="faAngleDown"
+                    class="transform transition-transform group-open:rotate-180 text-gray-400"></fa-icon>
+            </summary>
+            <div class="px-5 py-3">
+                @for(subCategory of getSubCategories(category.id); track subCategory.id){
+                <ul class="space-y-3">
+                    <li class="text-center">
+                        <a href="#"
+                            class="text-gray-700 font-medium relative inline-block after:block after:h-[2px] after:bg-blue-500 after:origin-left after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:durationion-300">{{subCategory.category}}
+                            1</a>
+                    </li>
+                </ul>
+                }
+            </div>
+        </details>
+        }
+    </div>
+</div>
