@@ -1,1 +1,21 @@
-<p>products works!</p>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-4 py-6">
+  @for (product of products; track product.id) {
+    <div class="bg-white border border-gray-200 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+      <!-- Fixed aspect ratio container -->
+      <div class="aspect-[3/4] overflow-hidden rounded-t-lg bg-gray-100 flex items-center justify-center">
+        <img
+          class="object-cover w-60 transition-transform duration-300 hover:scale-105"
+          [src]="'../../../../assets/images/' + product.ProductImage"
+          [alt]="product.ProductName"
+        />
+      </div>
+      <div class="p-4 text-center">
+        <h3 class="text-lg font-semibold text-gray-800 truncate">
+          <a href="#" class="hover:text-blue-600">{{ product.ProductName }}</a>
+        </h3>
+        <p class="text-sm text-gray-500 mt-1">${{ product.price }}</p>
+        <app-ratings [score]="product.rating"></app-ratings>
+      </div>
+    </div>
+  }
+</div>

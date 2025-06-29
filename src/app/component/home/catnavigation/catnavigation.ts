@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { CategoryStoreItem } from '../services/categories.storeItem';
 
 @Component({
   selector: 'app-catnavigation',
@@ -7,5 +8,8 @@ import { Component } from '@angular/core';
   styleUrl: './catnavigation.css'
 })
 export class Catnavigation {
+
+  constructor(public categoryStore: CategoryStoreItem){}
+
 
 }

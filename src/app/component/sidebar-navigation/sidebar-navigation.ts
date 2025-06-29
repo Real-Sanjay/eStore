@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { Category } from '../home/types/category';
-import { CategoryService } from '../home/services/category';
+import { CategoryStoreItem } from '../home/services/categories.storeItem';
 
 @Component({
   selector: 'app-sidebar-navigation',
@@ -12,18 +12,11 @@ import { CategoryService } from '../home/services/category';
 })
 export class SidebarNavigation {
 faAngleDown = faAngleDown;
-categories : Category[] = [];
-
-constructor(private categoryService: CategoryService) {
-this.getAllCategories();
-}
-
-getAllCategories() {
-  this.categories = this.categoryService.getAllCategories();
-}
+private categoryStoreItem = inject(CategoryStoreItem);
+readonly categories = this.categoryStoreItem.categories;
 
 getSubCategories(subCategoryId?: number) : Category[] {
-  return this.categories.filter(category => category.parentCategoryId === subCategoryId);
+  return this.categories().filter((category : Category) => subCategoryId ? category.parent_category_id === subCategoryId : category.parent_category_id === null);
 }
 
 }
