@@ -1,21 +1,22 @@
 import { Component } from '@angular/core';
-import { ProductService } from './product.service';
-import { ProductListItem } from './product';
+import { Product } from '../types/product';
 import { Ratings } from "../../ratings/ratings";
+import { ProductStoreItem } from '../services/product/product.storeItem';
+import { faBoxOpen } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-products',
-  imports: [Ratings],
+  imports: [Ratings, FontAwesomeModule, RouterLink],
   templateUrl: './products.html',
   styleUrl: './products.css',
-  providers: [ProductService]
 })
 export class Products {
 
-products : ProductListItem[] = [];
+  faBoxOpen = faBoxOpen;
 
-constructor(private productService: ProductService){
-  this.products = this.productService.getProducts();
+constructor(public productStore: ProductStoreItem){
 }
 
 }
