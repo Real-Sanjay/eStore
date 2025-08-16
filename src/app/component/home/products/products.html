@@ -30,6 +30,12 @@
           </h3>
           <p class="text-sm text-gray-500 mt-1">${{ product.price }}</p>
           <app-ratings [score]="product.ratings"></app-ratings>
+          <button class="flex items-center justify-center gap-2 mt-4 w-full py-2 text-white bg-black rounded-lg cursor-pointer hover:bg-gray-800 transition-colors"
+          (click)="addToCart(product)"
+          >
+          <fa-icon [icon]="faShoppingCart"></fa-icon>
+          <span>Add to Cart</span>
+          </button>
         </div>
       </div>
     }

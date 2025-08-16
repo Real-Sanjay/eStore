@@ -1,42 +1,50 @@
-    <div class="w-full max-w-full shadow-[5px_5px_20px_gray] bg-gray-900">
-        <div class="flex items-center w-full">
-            <!-- LEFT -->
-            <div class="text-white ml-2 p-3 w-[23%]">
-                <h1 class="text-xl font-bold">eStore</h1>
-            </div>
-            <!-- CENTER (search bar) -->
-            @if(displaySearch()) {
-            <div class=" flex-grow p-0 my-4 bg-white w-[50%]  h-[2.5rem] flex items-center max-w-[50%]">
-                <select class="w-[auto] bg-gray-300 h-full border-none outline-none px-3 pr-5 font-semibold"
-                    #categoryOptions>
-                    @for(category of categoryStore.topLevelCategories(); track category.id){
-                    <option [value]="category.id">{{category.category}}</option>
-                    }
-                </select>
-                <input class="w-[90%] h-full border-none outline-none inline-block px-3 " type="text"
-                    placeholder="search here...." #keyword>
-                <button
-                    class="w-[10%] h-10 flex items-center justify-center bg-gray-300 border-none cursor-pointer"><fa-icon
-                        [icon]="faSearch"
-                        (click)="onSearchButtonClick(categoryOptions.value, keyword.value)"></fa-icon></button>
-            </div>
-            }
-            <!-- RIGHT -->
+<div class="w-full max-w-full shadow-[5px_5px_20px_gray] bg-gray-900">
+    <div class="flex items-center w-full">
+        <!-- LEFT -->
+        <div class="text-white ml-2 p-3 w-[23%]">
+            <h1 class="text-xl font-bold">eStore</h1>
+        </div>
+        <!-- CENTER (search bar) -->
+        @if(displaySearch()) {
+        <div class=" flex-grow p-0 my-4 bg-white w-[50%]  h-[2.5rem] flex items-center max-w-[50%]">
+            <select class="w-[auto] bg-gray-300 h-full border-none outline-none px-3 pr-5 font-semibold"
+                #categoryOptions>
+                @for(category of categoryStore.topLevelCategories(); track category.id){
+                <option [value]="category.id">{{category.category}}</option>
+                }
+            </select>
+            <input class="w-[90%] h-full border-none outline-none inline-block px-3 " type="text"
+                placeholder="search here...." #keyword>
+            <button
+                class="w-[10%] h-10 flex items-center justify-center bg-gray-300 border-none cursor-pointer"><fa-icon
+                    [icon]="faSearch"
+                    (click)="onSearchButtonClick(categoryOptions.value, keyword.value)"></fa-icon></button>
+        </div>
+        }
+        <!-- RIGHT -->
 
-            <div class="ml-auto flex items-center gap-6 mr-2">
-                <div class="text-white flex items-center gap-2">
-                    <fa-icon class="text-[1.3em]" [icon]="faUserCircle"></fa-icon>
-                    <h5>
-                        <a class="text-white no-underline" href="">Sign In</a>
-                    </h5>
-                    <span>/</span>
-                    <h5>
-                        <a class="text-white no-underline" href="">Register</a>
-                    </h5>
-                </div>
-                <div class="flex gap-4 items-center justify-center text-white text-[1.3em]">
-                    <fa-icon [icon]="faShoppingCart"></fa-icon>
-                </div>
+        <div class="ml-auto flex items-center gap-6 mr-2">
+            <div class="text-white flex items-center gap-2">
+                <fa-icon class="text-[1.3em]" [icon]="faUserCircle"></fa-icon>
+                <h5>
+                    <a class="text-white no-underline" routerLink="/home/userSignIn">Sign In</a>
+                </h5>
+                <span>/</span>
+                <h5>
+                    <a class="text-white no-underline" href="">Register</a>
+                </h5>
+            </div>
+            <div class="flex relative items-center justify-center ">
+                <button (click)="navigateToCart()"
+                    class="flex items-center justify-center bg-gray-700 hover:bg-gray-800 p-2 text-white rounded-full transition-colors cursor-pointer">
+                    <fa-icon class="text-[1.3em]" [icon]="faShoppingCart"></fa-icon>
+                    @if(cartStoreItem.cart()) {
+                        @if(cartStoreItem.totalQuantity() > 0) {
+                            <span class="absolute -top-1 -right-1 flex items-center justify-center text-[0.7rem] font-semibold text-white bg-amber-500 rounded-full w-5">{{cartStoreItem.cart().totalQuantity}}</span>
+                        }
+                    }
+                </button>
             </div>
         </div>
     </div>
+</div>

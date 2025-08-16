@@ -10,15 +10,19 @@ export class ProductStoreItem {
   // Read only version of product data
   readonly products = this._products.asReadonly();
 
-  constructor(private productService : ProductService){
+  constructor(private productService: ProductService) {
     // Fetch products as soon as the store called
     this.loadProducts();
   }
 
   // Call the product service to fetch data inside signal
-  loadProducts(filter?:{parentCategoryId?: number, subCategoryId?: number, keyword?: string }) {
+  loadProducts(filter?: {
+    parentCategoryId?: number;
+    subCategoryId?: number;
+    keyword?: string;
+  }) {
     this.productService.getAllProducts(filter).subscribe((products) => {
-        this._products.set(products);
-    })
+      this._products.set(products);
+    });
   }
 }

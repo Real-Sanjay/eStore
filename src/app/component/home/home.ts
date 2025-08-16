@@ -6,26 +6,49 @@ import { CategoryService } from './services/category/category';
 import { ProductService } from './services/product/product.service';
 import { ProductStoreItem } from './services/product/product.storeItem';
 import { SearchKeyword } from './types/searchKeyword';
-import { RouterOutlet } from '@angular/router';
+import { Router, NavigationEnd, RouterOutlet } from '@angular/router';
+import { filter } from 'rxjs';
 @Component({
   selector: 'app-home',
   imports: [Header, Catnavigation, RouterOutlet],
   templateUrl: './home.html',
-  styleUrl: './home.css', 
-  providers: [ CategoryStoreItem, CategoryService, ProductService, ProductStoreItem]
+  styleUrl: './home.css',
+  providers: [
+    CategoryStoreItem,
+    CategoryService,
+    ProductService,
+    ProductStoreItem,
+  ],
 })
 export class Home {
-  constructor(private categoryStoreItem : CategoryStoreItem, private productStoreItem : ProductStoreItem){
+  constructor(
+    private categoryStoreItem: CategoryStoreItem,
+    private productStoreItem: ProductStoreItem,
+    private router: Router
+  ) {
+
+    // if router is in home url redirect to product
+    router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event) => {
+        if ((event as NavigationEnd).url === '/home') {
+          router.navigate(['/home/products']);
+        }
+      });
+
     // Fetching data from api as soon as home component load
-    categoryStoreItem.loadCategories(); 
+    categoryStoreItem.loadCategories();
     productStoreItem.loadProducts();
   }
- 
-  categorySelected(parentCategoryId: number) : void {
-    this.productStoreItem.loadProducts({parentCategoryId: parentCategoryId});
+
+  categorySelected(parentCategoryId: number): void {
+    this.productStoreItem.loadProducts({ parentCategoryId: parentCategoryId });
   }
 
-  searchOnKeyword(searchedKeyword: SearchKeyword) : void {
-    this.productStoreItem.loadProducts({parentCategoryId: searchedKeyword.categoryId ,keyword: searchedKeyword.keyword});
+  searchOnKeyword(searchedKeyword: SearchKeyword): void {
+    this.productStoreItem.loadProducts({
+      parentCategoryId: searchedKeyword.categoryId,
+      keyword: searchedKeyword.keyword,
+    });
   }
 }

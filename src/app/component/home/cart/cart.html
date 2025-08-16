@@ -1,0 +1,79 @@
+<ng-container>
+    @if(!cartStoreItem.cart().totalQuantity){
+    <div class="w-[90%] h-[20em] flex flex-col items-center justify-center mx-auto mt-12 p-6 bg-gray-50
+        rounded-xl shadow-lg">
+        <div class="flex flex-col items-center text-gray-500">
+            <fa-icon class="text-[70px] mb-4" [icon]="faBoxOpen"></fa-icon>
+            <p class="text-[20px] font-semibold">Your Cart is empty</p>
+            <p class="text-gray-500 mt-4">Looks like you haven't add anything to cart yet</p>
+        </div>
+
+        <div class="w-full border-t border-gray-200 my-6"></div>
+        <button (click)="navigateToHome()"
+            class="bg-amber-400 flex items-center hover:bg-amber-500 rounded-xl gap-2 px-6 py-2 shadow-lg transition-all duration-300 text-gray-800 cursor-pointer">
+            <fa-icon [icon]="faShoppingCart"></fa-icon>
+            <p>Continue Shopping</p>
+        </button>
+    </div>
+    }
+    @else if(cartStoreItem.cart().totalQuantity) {
+        <div class="w-[90%] mx-auto my-12">
+            <div class="flex flex-col lg:flex-row gap-8">
+            <div class="w-full lg:w-[70%] text-center">
+                @for(cartItems of cartStoreItem.cart().products; track cartItems) {
+                <div class="flex  flex-wrap md:flex-nowrap p-6 mb-8 shadow-md bg-white rounded-lg">
+                    <div class="w-full md:w-1/3 mb-4 md:mb-0 flex justify-center">
+                        <img [src]="'../../../../assets/images/' + cartItems.product.product_image" alt="product img"
+                            class="h-[13em] object-cover rounded-md">
+                    </div>
+                    <div class="w-full md:w-2/3 flex flex-col justify-between text-left p-3">
+                        <div class="flex justify-between items-start">
+                            <span class="text-xl font-semibold  ">{{cartItems.product.product_name}}</span>
+                            <span class="text-2xl font-bold">
+                                {{cartItems.product.price | currency}}
+                            </span>
+                        </div>
+                        <div>
+                            <app-ratings [score]="cartItems.product.ratings">
+                            </app-ratings>
+                        </div>
+
+                        <div class="w-full border-t border-gray-200 my-6"></div>
+                        <!-- add remove buttons -->
+                        <div class="flex items-center flex-wrap gap-4">
+                            <div class="flex rounded overflow-hidden border">
+                                <button (click)="decreaseQnty($event, cartItems)"
+                                    class="px-3 py-1 bg-gray-200 hover:bg-gray-300 font-bold cursor-pointer">-</button>
+                                <div class="px-4 py-1 font-semibold text-center min-2-[3rem]">{{cartItems.quantity}}
+                                </div>
+                                <button (click)="decreaseQnty($event, cartItems)"
+                                    class="px-3 py-1 bg-gray-200 hover:bg-gray-300 font-bold cursor-pointer">+</button>
+                            </div>
+                            <button (click)="removeItemFromCart(cartItems)"
+                                class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded cursor-pointer flex items-center gap-2">
+                                <fa-icon [icon]="faTrash"></fa-icon>
+                                Remove Item
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                }
+            </div>
+            <!-- Cart Summary box-->
+            <div class="w-full lg:w-[33%] h-fit bg-gray-50 mx-4 p-4 rounded-lg shadow-md">
+                <h2 class="font-semibold text-2xl mb-4">
+                    Summary
+                </h2>
+                <div class="text-left space-y-2">
+                    <p class="text-gray-600">Cart Total: {{cartStoreItem.cart().totalAmount | currency}}</p>
+                    <p class="text-gray-600">Shipping Charge: <span class="font-bold">Free</span></p>
+                    <hr>
+                    <p class="text-xl font-semibold">Total Amount: {{cartStoreItem.cart().totalAmount | currency}}</p>
+
+                    <button class="w-full bg-gray-800 text-white p-2 mt-6 hover:bg-gray-900 rounded transition-all cursor-pointer">Checkout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+</ng-container>

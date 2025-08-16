@@ -12,5 +12,9 @@
         <div class="text-sm">Inclusive of all taxes</div>
     </div>
     <div class="text-[1.5em] font-semibold text-gray-700">{{product()?.product_description}}</div>
+    <button (click)="addToCart()" class="flex  gap-3 align-items-center bg-yellow-400 hover:bg-yellow-500 cursor-pointer text-black font-semibold py-2 px-4 rounded-lg transition-colors duration-300 shadow ">
+        <fa-icon class="text-lg" [icon]="faShoppingCart"> </fa-icon>
+        <span class="text-lg">Add to cart</span>
+    </button>
 </div>
 </div>
