@@ -4,7 +4,7 @@ import { Notfound } from './component/notfound/notfound';
 import { ProductsGallery } from './component/home/products-gallery/products-gallery';
 import { ProductDetail } from './component/home/product-detail/product-detail';
 import { Cart } from './component/home/cart/cart';
-import { User } from './component/home/user/user';
+import { UserSignUp } from './component/home/user/userSignUp';
 
 export const routes: Routes = [
   {
@@ -25,7 +25,7 @@ export const routes: Routes = [
       },
       {
         path: 'userSignIn',
-        component: User
+        component: UserSignUp
       },
     
     ],
