@@ -1,0 +1,40 @@
+<div class="min-h-screen bg-gray-100 flex items-center justify-center">
+    <div class="flex flex-col justify-center bg-white  max-h-screen shadow-lg rounded-lg p-6 max-w-2xl w-full">
+        <h1 class="text-center font-medium text-lg">Welcome to login page</h1>
+        <form [formGroup]="userLoginForm" (ngSubmit)="onSubmit()">
+          <div class="flex flex-col">
+             <div>
+               <label for="email" class="block text-gray-700 text-sm font-medium mb-1">Email *</label>
+              <input type="text" id="email" class="w-full px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg" formControlName="email">
+              @if((email?.touched || email?.dirty) && email?.errors?.['required']) {
+                <span class="text-red-500 text-sm">email is required</span>
+              }
+              @if(email?.touched && email?.errors?.['email']) {
+                <span class="text-red-500 text-sm">please enter valid email</span>
+              }
+             </div>
+             <div>
+               <label for="password" class="block text-sm text-gray-700 font-medium">Password *</label>
+              <input type="text" id="password" class="w-full border py-2 px-4 rounded-lg border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" formControlName="password">
+              @if((password?.touched || password?.dirty) && password?.errors?.['required']) {
+                <span class="text-sm text-red-500">
+                  password is required
+                </span>
+              }
+             </div>
+             <div class="">
+              <button [disabled]="userLoginForm.invalid" class=" cursor-pointer w-full bg-gray-700 text-white text-center py-2 px-4 rounded-md mt-4 disabled:bg-gray-300 disabled:text-gray-600 disabled:hover:bg-gray-300
+             disabled:cursor-not-allowed">Login</button>
+               </div>
+             @if(this.alertText.length > 0) {
+              <div class="mt-4 py-2 px-4 " [ngClass]="{'bg-red-100 border-red-300 text-red-800 font-medium text-sm' : alertType === 2, 'bg-yellow-100 text-yellow-800 text-border-300' : alertType === 1, 'bg-green-100 text-green-800 border-green-300': alertType === 0}">
+              {{ this.alertText}}
+              </div>
+             }
+             <div>
+              <p class="mt-4 text-center">New user? <span  routerLink="/home/userSignUp" class="text-decoration-underline text-blue-800 hover:text-blue-900 cursor-pointer">click here to register here</span></p>
+             </div>
+          </div>
+        </form>
+    </div>
+</div>

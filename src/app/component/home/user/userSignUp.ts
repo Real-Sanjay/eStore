@@ -13,13 +13,13 @@ import { Observable } from 'rxjs';
 import { response } from 'express';
 import { error } from 'console';
 import { NgClass } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-user',
-  imports: [ReactiveFormsModule, NgClass],
+  imports: [ReactiveFormsModule, NgClass, RouterLink],
   templateUrl: './userSignUp.html',
   styleUrl: './userSignUp.css',
-  providers: [UserService]
 })
 export class UserSignUp {
   userRegisterForm: FormGroup;

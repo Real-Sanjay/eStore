@@ -8,6 +8,7 @@ import { ProductStoreItem } from './services/product/product.storeItem';
 import { SearchKeyword } from './types/searchKeyword';
 import { Router, NavigationEnd, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs';
+import { UserService } from './user/service/user.service';
 @Component({
   selector: 'app-home',
   imports: [Header, Catnavigation, RouterOutlet],
@@ -18,6 +19,7 @@ import { filter } from 'rxjs';
     CategoryService,
     ProductService,
     ProductStoreItem,
+    UserService
   ],
 })
 export class Home {
